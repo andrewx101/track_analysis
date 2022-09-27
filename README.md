@@ -1,7 +1,7 @@
 # Track Analysis
 ### Introduction
 
-This app analyses the track data of multi-particle tracking microrheology and calculates the mean-square displacements (MSDs), the linear viscoelastic moduli (*G*&prime; and *G*&Prime;) by the generalized Stokes-Einstein relation (GSER), and the non-Gaussian parameters, *etc*. [^*]
+This app analyses the track data of multi-particle tracking microrheology and calculates the mean-square displacements (MSDs), the linear viscoelastic moduli (*G*&prime; and *G*&Prime;) by the generalized Stokes--Einstein relation (GSER), and the non-Gaussian parameters, *etc*. [^*]
 
 Features:
 * supports analysis upon multiple track files
