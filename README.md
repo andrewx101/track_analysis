@@ -56,7 +56,7 @@ The `Plot data` panel allow selection of the following observables to plot.
 
 #### MSD
 
-The multi-particle mean-square displacements $\left\langle\Delta x^2\right\rangle$, $\left\langle\Delta y^2\right\rangle$, and $\left\langle\Delta r^2\right\rangle$, where $\Delta r^2=\Delta x^2+\Delta y^2$. A black dash line indicates the slope of unity.
+The multi-particle mean-square displacements <&Delta; *x*<sup>2</sup>>, <&Delta;*y*<sup>2</sup>>, and <&Delta;*r*<sup>2</sup>>, where &Delta;*r*<sup>2</sup> = &Delta;*x*<sup>2</sup> + &Delta;*y*<sup>2</sup>. A black dash line indicates the slope of unity.
 
 #### Modulus
 
@@ -72,7 +72,7 @@ The distribution density of &Delta;*x* (van Hove function, scattered) and the co
 
 #### SP-MSD
 
-Single-particle MSD $\left\langle\Delta x^2\right\rangle_\text{single}$ (solid) and the corresponding multi-particle counterpart (dash).
+Single-particle MSD <&Delta;*x*<sup>2</sup>><sub>single</sub> (solid) and the corresponding multi-particle counterpart (dash).
 
 ### Lucy
 
@@ -86,7 +86,7 @@ The `msd_data.mat` contains the following 6 vairables.
 
 #### `msd`
 
-*n* &times; 4 matrix of the multi-particle MSDs, where *n* is the number of lag times. The 4 columns are: &Delta;*t* (s),  $\left\langle\Delta x^2\right\rangle$ (&micro;m^2^), $\left\langle\Delta y^2\right\rangle$ (&micro;m^2^), and $\left\langle\Delta r^2\right\rangle$ (&micro;m^2^), respectively. 
+*n* &times; 4 matrix of the multi-particle MSDs, where *n* is the number of lag times. The 4 columns are: &Delta;*t* (s),  <&Delta;*x*<sup>2</sup>>  (&micro;m^2^), <&Delta; *y*<sup>2</sup>> (&micro;m^2^), and <&Delta;*r*<sup>2</sup>> (&micro;m^2^), respectively. 
 
 #### `msd_i`
 
@@ -115,5 +115,5 @@ The distribution density and distribution function of diffusivity, respectively.
 A reconstructed van_Hove function from the calculated *P*(*D*) data. It is a 2-column matrix: &Delta;*x* (micro;m), distribution density *p*(&Delta;*x*) (You may check the validity of the latter by comparing `van_Hove_rec` with the van_Hove data of the same lag time in the `msd_data.mat` file .
 
 [^*]: This `readme.md` and also the app are for users familiar with the field of probe microrheology. See for example: Waigh, T. A. "Microrheology of Complex Fluids." *Reports on Progress in Physics* 68, no. 3 (2005): 685-742.
-[^†]: See for example: Hong, W., *et al. &ldquo;Colloidal Probe Dynamics in Gelatin Solution During the Sol–Gel Transition.&rdquo; *Soft Matter* 14, no. 19 (2018): 3694-703. 
+[^†]: See for example: Hong, W., *et al.* &ldquo;Colloidal Probe Dynamics in Gelatin Solution During the Sol–Gel Transition.&rdquo; *Soft Matter* 14, no. 19 (2018): 3694-703. 
 [^‡]: Lucy, L. B. &ldquo;An Iterative Technique for the Rectification of Observed Distributions.&rdquo; *The Astronomical Journal* 79, no. 6 (1974): 745-54. 
