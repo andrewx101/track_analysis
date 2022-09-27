@@ -6,7 +6,7 @@ This app analyses the track data of multi-particle tracking microrheology and ca
 Features:
 * supports analysis upon multiple track files
 * supports manual optimization for GSER calculation
-* supports calculation of the distribution of diffusivity p(D) by Lucy's algorithm[^†] 
+* supports calculation of the distribution of diffusivity *p*(*D*) by Lucy's algorithm[^†][^‡] 
 
 ### Installation
 
@@ -64,7 +64,7 @@ The storage and loss moduli *G*&prime; and *G*&Prime; calculated by the `GSER`
 
 #### alpha_2
 
-The mean single-particle and multi-particle non-Gaussian parameters[^&dagger;]. The mean single-particle parameter is plotted with its standard error among all tracks.
+The mean single-particle and multi-particle non-Gaussian parameters[^†]. The mean single-particle parameter is plotted with its standard error among all tracks.
 
 #### van Hove
 
@@ -76,7 +76,7 @@ Single-particle MSD $\left\langle\Delta x^2\right\rangle_\text{single}$ (solid) 
 
 ### Lucy
 
-For each lag time &Delta;*t*, adjusted by the `Lag time` slider, the van Hove function can be deconvolve into a distribution of diffusivity *P*(*D*) using Lucy's algorithm[^&Dagger;]. First select the lag time under which you want to calculate *P*(*D*), then click the `Lucy` button to start the calculation. After the calculation the result will replace the content in the figure. *P*(*D*) is ploted as blue patches, and the corresponding cumulated distribution is plotted as line. Each click on the `Lucy` button will replace the old result of *P*(*D*).
+For each lag time &Delta;*t*, adjusted by the `Lag time` slider, the van Hove function can be deconvolve into a distribution of diffusivity *P*(*D*) using Lucy's algorithm[^‡]. First select the lag time under which you want to calculate *P*(*D*), then click the `Lucy` button to start the calculation. After the calculation the result will replace the content in the figure. *P*(*D*) is ploted as blue patches, and the corresponding cumulated distribution is plotted as line. Each click on the `Lucy` button will replace the old result of *P*(*D*).
 
 ### Saving data
 
