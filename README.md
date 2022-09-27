@@ -86,7 +86,7 @@ The `msd_data.mat` contains the following 6 vairables.
 
 #### `msd`
 
-*n* &times; 4 matrix of the multi-particle MSDs, where *n* is the number of lag times. The 4 columns are: &Delta;*t* (s),  <&Delta;*x*<sup>2</sup>> (&micro;m^2^), <&Delta;*y*<sup>2</sup>> (&micro;m^2^), and <&Delta;*r*<sup>2</sup>> (&micro;m^2^), respectively. 
+*n* &times; 4 matrix of the multi-particle MSDs, where *n* is the number of lag times. The 4 columns are: &Delta;*t* (s),  <&Delta;*x*<sup>2</sup>> (&micro;m<sup>2</sup>), <&Delta;*y*<sup>2</sup>> (&micro;m<sup>2</sup>), and <&Delta;*r*<sup>2</sup>> (&micro;m<sup>2</sup>), respectively. 
 
 #### `msd_i`
 
