@@ -1,7 +1,7 @@
 # Track Analysis
 ### Introduction
 
-This app analyses the track data of multi-particle tracking microrheology and calculate mean-square displacements (MSDs), the linear viscoelastic moduli (*G*&prime; and *G*&Prime;) by the generalized Stokes-Einstein relation (GSER), and the non-Gaussian parameters, *etc*. [^*]
+This app analyses the track data of multi-particle tracking microrheology and calculates the mean-square displacements (MSDs), the linear viscoelastic moduli (*G*&prime; and *G*&Prime;) by the generalized Stokes-Einstein relation (GSER), and the non-Gaussian parameters, *etc*. [^*]
 
 Features:
 * supports analysis upon multiple track files
@@ -98,7 +98,7 @@ The `msd_data.mat` contains the following 6 vairables.
 
 #### `alpha` and `alpha_i`
 
-Multi-particle and mean single-particle non-Gaussian parameters. Both are 3-column matrices: &Delta;*t* (s), *&alpha;*~2~, VAR(*&alpha;*~2~), where VAR(*&alpha;*~2~) is the finite sample variance of the non-Gaussian parameter.
+Multi-particle and mean single-particle non-Gaussian parameters. Both are 3-column matrices: &Delta;*t* (s), *&alpha;*<sub>2</sub>, VAR(*&alpha;*<sub>2</sub>), where VAR(*&alpha;*<sub>2</sub>) is the finite sample variance of the non-Gaussian parameter.
 
 #### van_Hove
 
@@ -108,7 +108,7 @@ The `PD_data_xxx.mat` contains the following 3 variables
 
 #### `p_D` and `P_D`
 
-The distribution density and distribution function of diffusivity, respectively. Both are 2-column matrices: *D* (m^2^/s), *p*(*D*) (s m<sup>&#8722;2</sup>) or *P*(*D*) (-).
+The distribution density and distribution function of diffusivity, respectively. Both are 2-column matrices: *D* (m<sup>2</sup>/s), *p*(*D*) (s m<sup>&#8722;2</sup>) or *P*(*D*) (-).
 
 #### `van_Hove_rec`
 
