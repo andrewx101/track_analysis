@@ -10,7 +10,7 @@ Features:
 
 ### Installation
 
-Drag the `.mlappinstall` file to the command window of MATLAB. Then it will appear in the app list. 
+Unzip and drag the `.mlappinstall` file to the command window of MATLAB. After the installation it will appear in the app list. 
 
 ### Data preparation
 
@@ -20,7 +20,7 @@ The app can open any `.mat` file that contains a *N* &times; 4 matrix named `tr`
 
 ### Load data
 
-Click `Add...` to select `.mat` file that contains the matrix `tr`. Multiple selection is supported. Click `Add...` many time to append more tracks. The files are listed in the table next to the button. Click `Remove` to remove the currently selected file. The number of tracks contains in each file is also listed in this table.
+Click `Add...` to select `.mat` files that contain the matrix `tr`. Multiple selection is supported. Click `Add...` many time to append more tracks. The files are listed in the table next to the button. Click `Remove` to remove the currently selected file. The number of tracks contains in each file is also listed in this table.
 
 ### Setting parameters
 
@@ -100,7 +100,7 @@ The `msd_data.mat` contains the following 6 vairables.
 
 Multi-particle and mean single-particle non-Gaussian parameters. Both are 3-column matrices: &Delta;*t* (s), *&alpha;*<sub>2</sub>, VAR(*&alpha;*<sub>2</sub>), where VAR(*&alpha;*<sub>2</sub>) is the finite sample variance of the non-Gaussian parameter.
 
-#### van_Hove
+#### `van_Hove`
 
 The displacement &Delta;*x* distribution density *p*(&Delta;*x*), an *n* &times 2 cell array.  The 2 cells in each row are the distribution densities and the bins edges, respectively.
 
@@ -112,7 +112,9 @@ The distribution density and distribution function of diffusivity, respectively.
 
 #### `van_Hove_rec`
 
-A reconstructed van_Hove function from the calculated *P*(*D*) data. It is a 2-column matrix: &Delta;*x* (micro;m), distribution density *p*(&Delta;*x*) (You may check the validity of the latter by comparing `van_Hove_rec` with the van_Hove data of the same lag time in the `msd_data.mat` file .
+A reconstructed van_Hove function from the calculated *P*(*D*) data. It is a 2-column matrix: &Delta;*x* (micro;m), distribution density *p*(&Delta;*x*) (You may check the validity of the latter by comparing `van_Hove_rec` with the van_Hove data of the same lag time in the `msd_data.mat` file.
+
+[![View track_analysis on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://ww2.mathworks.cn/matlabcentral/fileexchange/118310-track_analysis)
 
 [^*]: This `readme.md` and also the app are for users familiar with the field of probe microrheology. See for example: Waigh, T. A. "Microrheology of Complex Fluids." *Reports on Progress in Physics* 68, no. 3 (2005): 685-742.
 [^†]: See for example: Hong, W., *et al.* &ldquo;Colloidal Probe Dynamics in Gelatin Solution During the Sol–Gel Transition.&rdquo; *Soft Matter* 14, no. 19 (2018): 3694-703. 
