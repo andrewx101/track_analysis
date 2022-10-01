@@ -96,9 +96,9 @@ The `msd_data.mat` contains the following 6 vairables.
 
 3-column matrix of the GSER result. The columns are angular frequency *&omega;* (rad/s), *G*&prime; (Pa), *G*&Prime; (Pa), respectively.
 
-#### `alpha` and `alpha_i`
+#### `alpha_2` and `alpha_2_i`
 
-Multi-particle and mean single-particle non-Gaussian parameters. Both are 3-column matrices: &Delta;*t* (s), *&alpha;*<sub>2</sub>, VAR(*&alpha;*<sub>2</sub>), where VAR(*&alpha;*<sub>2</sub>) is the finite sample variance of the non-Gaussian parameter.
+Multi-particle and mean single-particle non-Gaussian parameters, both of which are 3-column matrices. The 3 columns of `alpha_2_i` are &Delta;*t* (s), the mean *&alpha;*<sub>2</sub> among multiple tracks, and the standard error of *&alpha;*<sub>2</sub> among multiple tracks. The 3 columns of `alpha_2` are &Delta;*t* (s), the multi-particle *&alpha;*<sub>2</sub>, and the finite-sample variance of the multi-particle *&alpha;*<sub>2</sub>.
 
 #### `van_Hove`
 
