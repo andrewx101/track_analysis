@@ -14,13 +14,17 @@ Unzip and drag the `.mlappinstall` file to the command window of MATLAB. After t
 
 ### Data preparation
 
-Consider a time-lapse video of *M* frames. The resolution of the video is *X* pixels &times; *Y* pixels. The frames are labeled by positive integers, called "frame ID". Previous image analysis has provided a results of a number of tracks from this video. The tracks are labeled by positive integers called "track ID".  In general, different track starts at different frame ID, and last for different number of frame. Each track is determined by the data of *x* and *y* positions of the trajectory in each frame. It is sufficient to list the *x*/*y* positions, frame ID's and track ID's to completely describe a set of multiple tracks.    
+Consider a time-lapse video of *M* frames. The resolution of the video is *X* pixels &times; *Y* pixels. Each frame is labeled by a positive integer, called "frame ID". Suppose that previous image analysis has provided a result of a number of tracks from this video. Each track is labeled by a positive integer, called "track ID". The information of a track (bearing the same track ID) is provided by the data of *x* and *y* positions (in the unit of pixels), each of which corresponds to a distinct frame_ID's. So, each row of a track data consists of the ordered quadruple (x, y, frame ID, track ID). In general, different tracks would start at different frame ID's and last for different number of frames. Also, tracks that skipping some of the frames (i.e. under the same track ID, the frame ID's are not a set of continuous natural numbers) can be handled by this app. An *N* &times; 4 matrix each row of which is the quadruple (x, y, frame ID, track ID) is sufficient to completely describe a set of multiple tracks.
 
-The app can open any `.mat` file that contains a *N* &times; 4 matrix named `tr`. The 4 columns of `tr` are *x* positions, *y* positions, frame ID, and tracks ID in order. See `tr_example.mat` for an example.
+The app can open any `.mat` file that contains an *N* &times; 4 matrix named `tr`. The 4 columns of `tr` are *x* positions, *y* positions, frame ID, and tracks ID in order. See `tr_example.mat` for an example.
+
+Within the same `tr` data, the ordered pairs (frame ID, track ID) must be pair-wise distinct, since no one particle (the same track ID) can appear at two or more positions in the same moment (frame ID).
+
+The app can process multiple '.mat' files. For example, they may be the results from different videos but on the same sample. In this case the track ID and frame ID from the `tr` of different imported `.mat` files do not need to be distinct video-wise. In other words, in each of these `tr` variables, the track ID's and frame ID's can, without exception, be (re-)starting from 1, regardless of the others.
 
 ### Load data
 
-Click `Add...` to select `.mat` files that contain the matrix `tr`. Multiple selection is supported. Click `Add...` many time to append more tracks. The files are listed in the table next to the button. Click `Remove` to remove the currently selected file. The number of tracks contains in each file is also listed in this table.
+Click `Add...` to select `.mat` files that contain the matrix `tr`. Multiple selection is supported. Click `Add...` many times to append more tracks. The files are listed in the table next to the button. Click `Remove` to remove the currently selected file. The number of tracks contains in each file is also listed in this table.
 
 ### Setting parameters
 
