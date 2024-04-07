@@ -6,7 +6,7 @@ This app analyses the track data of multi-particle tracking microrheology and ca
 Features:
 * supports analysis upon multiple track files
 * supports manual optimization for GSER calculation
-* supports calculation of the distribution of diffusivity *p*(*D*) by Lucy's algorithm[^†][^‡] 
+* supports calculation of the distribution of diffusivity *p*(*D*) by Lucy's algorithm[^†][^‡]
 
 ### Installation
 
@@ -17,6 +17,8 @@ Unzip and drag the `.mlappinstall` file to the command window of MATLAB. After t
 Consider a time-lapse video of *M* frames. The resolution of the video is *X* pixels &times; *Y* pixels. Each frame is labeled by a positive integer, called "frame ID". Suppose that previous image analysis has provided a result of a number of tracks from this video. Each track is labeled by a positive integer, called "track ID". The information of a track (bearing the same track ID) is provided by the data of *x* and *y* positions (in the unit of pixels), each of which corresponds to a distinct frame_ID's. So, each row of a track data consists of the ordered quadruple (x, y, frame ID, track ID). In general, different tracks would start at different frame ID's and last for different number of frames. Also, tracks that skipping some of the frames (i.e. under the same track ID, the frame ID's are not a set of continuous natural numbers) can be handled by this app. An *N* &times; 4 matrix each row of which is the quadruple (x, y, frame ID, track ID) is sufficient to completely describe a set of multiple tracks.
 
 The app can open any `.mat` file that contains an *N* &times; 4 matrix named `tr`. The 4 columns of `tr` are *x* positions, *y* positions, frame ID, and tracks ID in order. See `tr_example.mat` for an example.
+
+Another app, [Particle Tracking](https://github.com/andrewx101/particle_tracking), is designed for generating the `tr` data from time-lapse series.
 
 Within the same `tr` data, the ordered pairs (frame ID, track ID) must be pair-wise distinct, since no one particle (the same track ID) can appear at two or more positions in the same moment (frame ID).
 
