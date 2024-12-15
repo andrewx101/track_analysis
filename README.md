@@ -98,9 +98,16 @@ The calculated restults will be remembered once you close the pop-up windows. An
 
 There can be a set of *P*(*D*) data for only one lag time. Everytime you click `Lucy` button, the old results of *P*(*D*) is replaced by new ones.
 
+### The $\chi_4$ calculation
+The 4-point susceptibilities $\chi_4$ are calculated from the trajectories. The calculation requires Parallel Computing Toolbox. And you should have at least one profile for parallel computing. Please refer to official help of this toolbox. The app check if your environment support parallel computing before started. If so, the option of $\chi_4$ will be enabled.
+
+The theory behind 4-point susceptibility is not discussed here. Please refer to other papers, such as: Karmaker, Dasgupta & Sastry (2016), Rep. Prog. Phys. 79:016601.
+
+Click the button $\chi_4$ to start calculation. If the calculation is successful, the status message is "Done!". Select $\chi_4$ option button and the result will be plotted. The result plotted is the self-part of the 4-point susceptibility, since for multiparticle tracking it is usually the only meaninful result. But by clicking `Save ...` button a number of results is saved.
+
 ### Saving data
 
-By clicking the `Save...` button a folder selection dialogue popup and the current calculated results will be saved into a MATLAB data file named `msd_data.mat` in the selected folder.  If a Lucy calculation has performed an addition MATLAB data file named `PD_data_xxx.mat` in the same folder, where xxx is the lag time under which the *P*(*D*) was calculated. If no Lucy calculation has performed, a dialog stating this will appear after saving.
+By clicking the `Save...` button a folder selection dialogue popup and the current calculated results will be saved into a MATLAB data file named `msd_data.mat` in the selected folder.  If a Lucy calculation has performed an addition MATLAB data file named `PD_data_xxx.mat` in the same folder, where xxx is the lag time under which the *P*(*D*) was calculated. A separated file named `chi4.mat` will be saved to the selected path.
 
 The `msd_data.mat` contains the following 6 vairables.
 
@@ -133,6 +140,9 @@ The distribution density and distribution function of diffusivity, respectively.
 #### `van_Hove_rec`
 
 A reconstructed van_Hove function from the calculated *P*(*D*) data. It is a 2-column matrix: &Delta;*x* (micro;m), distribution density *p*(&Delta;*x*) (You may check the validity of the latter by comparing `van_Hove_rec` with the van_Hove data of the same lag time in the `msd_data.mat` file.
+
+#### 4-point susceptibilities
+A separated file named `chi4.mat` will be saved to the selected path. This file includes the self-, distinct-part and total result of $\chi_4$, as the variables, `chi4_s`, `chi4_d`,`_chi4_t`, as well as those of the overlap functions $Q\left(\Delta t\right)$, as the variables, `Q_s`, `Q_d`, `Q_t`. The first column of these variables are the lag time in second. The values of the $\chi_4$ is by unit m<sup>3</sup>.
 
 [![View track_analysis on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://ww2.mathworks.cn/matlabcentral/fileexchange/118310-track_analysis)
 
