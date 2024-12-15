@@ -80,9 +80,23 @@ The distribution density of &Delta;*x* (van Hove function, scattered) and the co
 
 Single-particle MSD <&Delta;*x*<sup>2</sup>><sub>single</sub> (solid) and the corresponding multi-particle counterpart (dash).
 
-### Lucy
+### The Lucy pop-up window
 
-For each lag time &Delta;*t*, adjusted by the `Lag time` slider, the van Hove function can be deconvolve into a distribution of diffusivity *P*(*D*) using Lucy's algorithm[^‡]. First select the lag time under which you want to calculate *P*(*D*), then click the `Lucy` button to start the calculation. After the calculation the result will replace the content in the figure. *P*(*D*) is ploted as blue patches, and the corresponding cumulated distribution is plotted as line. Each click on the `Lucy` button will replace the old result of *P*(*D*).
+For each lag time &Delta;*t*, adjusted by the `Lag time` slider, the van Hove function can be deconvolve into a distribution of diffusivity *P*(*D*) using Lucy's algorithm[^‡]. First select the lag time under which you want to calculate *P*(*D*), then click the `Lucy` button to open the Lucy's algorithm pop-up windows.
+
+The algorithm will iterate until the total residue reached the value of `Tolerance` edit box. But please leave the value being very small at first.
+
+The algorithm will estimate an average diffusion coefficient *D* from the MSD value of the current lag time, and will deconvolute the van Hove function data into a distribution of *D* over a range (6 orders of magnitude) around the estimated value. Set the number of bins for such a range in the `# bins` edit box.
+
+Click `Run` button to start iteration. The first plot shows the comparison between the experimental data of van Hove function with the reconstructed ones by the iteration algorithm. The second plot shows the resulted probability *P*(*D*). The third plot shows the total residue vs number of iterations.
+
+Observe the growth behavior of the total residue until the curve seems to approach to a plateau value (either from below or above). Then pause the iteration by clicking `Pause` button. Now you can read the total residue data for an estimate of the plateau value. You may want to enter a suitable value of `Tolerance` at this moment, so that when you click the `Resume` button the iteration will stop automatically as the total residue reaches the set value, during which you can do other jobs. 
+
+Or you may just monitor the goodness of fit in the first plot and click the `Stop` button once you are satisfied. 
+
+The calculated restults will be remembered once you close the pop-up windows. And the `Lag time` slider bar will show only one minor tick, indicating the lag time for which you have calculated *P*(*D*). The reconstructed van Hove function will show in the plot if you select the `van Hove` option under `Plot data` and the `Lag time` slider bar is adjusted to the corresponding lag time.
+
+There can be a set of *P*(*D*) data for only one lag time. Everytime you click `Lucy` button, the old results of *P*(*D*) is replaced by new ones.
 
 ### Saving data
 
