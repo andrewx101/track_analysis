@@ -7,6 +7,7 @@ Features:
 * supports analysis upon multiple track files
 * supports manual optimization for GSER calculation
 * supports calculation of the distribution of diffusivity *p*(*D*) by Lucy's algorithm[^†][^‡]
+* supports 4-point susceptibility calculation
 
 ### Installation
 
