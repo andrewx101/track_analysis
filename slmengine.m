@@ -147,7 +147,7 @@ if ~isempty(prescription.Weights)
 end
 if ~isempty(prescription.ErrorBar)
   EB = prescription.ErrorBar;
-  if length(EB) == 1
+  if isscalar(EB)
     prescription.ErrorBar = repmat(EB,n,2);
   elseif (size(EB,1) == 1)
     prescription.ErrorBar = repmat(EB',1,2);
@@ -188,7 +188,7 @@ if strcmp(prescriptionhat.InteriorKnots,'free')
   
   % get the starting values for the knots
   % knots vector, dx
-  if length(prescriptionhat.Knots)==1
+  if isscalar(prescriptionhat.Knots)
     [knots,nk] = chooseknots(prescriptionhat.Knots,n,x);
   else
     % we should check that the knots contain the data
@@ -351,7 +351,7 @@ property_check(prescription,'constant')
 % x and y
 nx = length(x);
 % knots vector, dx
-if length(prescription.Knots)==1
+if isscalar(prescription.Knots)
   [knots,nk] = chooseknots(prescription.Knots,nx,x);
 else
   % we should check that the knots contain the data
@@ -429,7 +429,7 @@ if nc>2
          -2./(dx2.*(dx1+dx2))];
   
   Mreg = zeros(nc-2,nc);
-  for i=1:(nc-2);
+  for i=1:(nc-2)
     Mreg(i,i+[0 1 2]) = fda(i,:);
   end
   rhsreg = zeros(nc-2,1);
@@ -760,7 +760,7 @@ property_check(prescription,'linear')
 nx = length(x);
 
 % knots vector, dx
-if length(prescription.Knots)==1
+if isscalar(prescription.Knots)
   % just given a number of knots
   [knots,nk] = chooseknots(prescription.Knots,nx,x);
 else
@@ -841,7 +841,7 @@ if nc>2
          -2./(dx2.*(dx1+dx2))];
   
   Mreg = zeros(nc-2,nc);
-  for i=1:(nc-2);
+  for i=1:(nc-2)
     Mreg(i,i+[0 1 2]) = fda(i,:);
   end
   rhsreg = zeros(nc-2,1);
@@ -1384,7 +1384,7 @@ property_check(prescription,'cubic')
 nx = length(x);
 
 % knots vector, dx
-if length(prescription.Knots)==1
+if isscalar(prescription.Knots)
   % just given a number of knots
   [knots,nk] = chooseknots(prescription.Knots,nx,x);
 else
@@ -2404,7 +2404,7 @@ if (isnumeric(RP) && (RP>=0)) || ((ischar(RP)) && (strcmpi(RP,'smoothest')))
   % solve the problem using the given regularization parameter
   
   finalRP = RP;
-  [coef,lambda] = solve_slm_system(finalRP,Mdes,rhs,Mreg,rhsreg, ...
+  [coef,~] = solve_slm_system(finalRP,Mdes,rhs,Mreg,rhsreg, ...
     Meq,rhseq,Mineq,rhsineq,prescription);
   
 elseif isnumeric(RP) && (RP<0)
@@ -2420,7 +2420,7 @@ elseif isnumeric(RP) && (RP<0)
   finalRP = 10^RP;
   
   % do one final call to get the final coefficients
-  [coef,lambda] = solve_slm_system(finalRP,Mdes,rhs,Mreg,rhsreg, ...
+  [coef,~] = solve_slm_system(finalRP,Mdes,rhs,Mreg,rhsreg, ...
     Meq,rhseq,Mineq,rhsineq,prescription);
   
 elseif ischar(RP)
@@ -2437,7 +2437,7 @@ elseif ischar(RP)
   finalRP = 10^RP;
   
   % do one final call to get the final coefficients
-  [coef,lambda] = solve_slm_system(finalRP,Mdes,rhs,Mreg,rhsreg, ...
+  [coef,~] = solve_slm_system(finalRP,Mdes,rhs,Mreg,rhsreg, ...
     Meq,rhseq,Mineq,rhsineq,prescription);
 end
 

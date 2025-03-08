@@ -200,7 +200,7 @@ else
   % solverflag was supplied. Make sure it is legal.
   valid = {'\', 'backslash', 'pinv'};
   ind = strmatch(solverflag,valid);
-  if (length(ind)==1)
+  if (isscalar(ind))
     solverflag = valid{ind};
   else
     error(['Invalid solverflag: ',solverflag])
@@ -281,7 +281,7 @@ switch solverflag
     % system
     if crank < m
       k = Q(:,(crank+1):end)'*d;
-      if any(k > (Ctol*norm(d)));
+      if any(k > (Ctol*norm(d)))
         error 'The constraint system is deficient and numerically inconsistent'
       end
     end
@@ -343,7 +343,7 @@ switch solverflag
     % system
     if crank < m
       k = U(:,(crank+1):end)'*d;
-      if any(k > (Ctol*norm(d)));
+      if any(k > (Ctol*norm(d)))
         error 'The constraint system is deficient and numerically inconsistent'
       end
     end

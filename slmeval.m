@@ -190,7 +190,7 @@ end
 % it will be extrapolated.
 if evalmode >= 0
   % use histc to bin the points.
-  [junk,xbin] = histc(x,knots);
+  [~,xbin] = histc(x,knots);
 
   % any point which falls at the top end, is said to
   % be in the last bin.
@@ -517,12 +517,12 @@ nx = length(x);
 db = diff(binedges);
 if all(db>0)
   % increasing bins
-  [junk,bind] = histc(x,binedges);
+  [~,bind] = histc(x,binedges);
   bind(bind==nb)=nb-1;
 
 elseif all(db<0)
   % decreasing sequence of edges
-  [junk,bind] = histc(-x,-binedges);
+  [~,bind] = histc(-x,-binedges);
   bind(bind==nb)=nb-1;
 
 else

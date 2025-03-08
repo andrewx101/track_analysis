@@ -30,7 +30,7 @@ function slm = hermite2slm(harray)
 % Release: 1.0
 % Release date: 2/6/07
 
-[n,k] = size(harray);
+[~,k] = size(harray);
 
 % check that the knots are sorted in increasing order
 % if not, then the spline will fail eventually.
