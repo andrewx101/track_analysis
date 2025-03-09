@@ -77,10 +77,6 @@ The mean single-particle and multi-particle non-Gaussian parameters[^†]. The m
 
 The distribution density of &Delta;*x* (van Hove function, scattered) and the corresponding Gaussian distribution (solid) estimated from the MSD for the lag time &Delta;*t* adjusted by the `Lag time` slider.
 
-#### SP-MSD
-
-Single-particle MSD <&Delta;*x*<sup>2</sup>><sub>single</sub> (solid) and the corresponding multi-particle counterpart (dash).
-
 ### The Lucy pop-up window
 
 For each lag time &Delta;*t*, adjusted by the `Lag time` slider, the van Hove function can be deconvolve into a distribution of diffusivity *P*(*D*) using Lucy's algorithm[^‡]. First select the lag time under which you want to calculate *P*(*D*), then click the `Lucy` button to open the Lucy's algorithm pop-up windows.
@@ -106,9 +102,16 @@ The theory behind 4-point susceptibility is not discussed here. Please refer to 
 
 Click the button $\chi_4$ to start calculation. If the calculation is successful, the status message is "Done!". Select $\chi_4$ option button and the result will be plotted. The result plotted is the self-part of the 4-point susceptibility, since for multiparticle tracking it is usually the only meaninful result. But by clicking `Save ...` button a number of results is saved.
 
-### Saving data
+### The `Trajectories` popup window
+
+Click the `traj. excl.` button to open the `Trajectories` popup window.
+
+In the popup window, single-particle MSD <&Delta;*x*<sup>2</sup>><sub>single</sub> (solid) and the corresponding multi-particle counterpart (dash) is plotted in the left axes, with the selected one highlighted. The corresponding trajectory of the selected particle is plotted in the right, bigger axes, with its track id also displayed. You can select a track by clicking on the SP-MSD plot, or from the `Track#` list box. Double clicking one item in the `Track#` list box adds the corresponding item to the `Exclude:` list box, which is the track id's to be excluded. Double clicking one item in the `Exclude:` list box removes it. Click save or just directly close the popup window to save the excluded tracks information. After that, click the `Calculate` button immediately to re-calculate the variables based from the excluded tracks. After this calculation, the excluded tracks information is cleared. Clicking the `Calculate` button again calculates the variable based on the original tracks in the table. Changing the track list in the table also clears the excluded tracks information. You must re-select the excluded tracks if you just change the track list.
+
+## Saving data
 
 By clicking the `Save...` button a folder selection dialogue popup and the current calculated results will be saved into a MATLAB data file named `msd_data.mat` in the selected folder.  If a Lucy calculation has performed an addition MATLAB data file named `PD_data_xxx.mat` in the same folder, where xxx is the lag time under which the *P*(*D*) was calculated. A separated file named `chi4.mat` will be saved to the selected path.
+
 
 The `msd_data.mat` contains the following 6 vairables.
 
