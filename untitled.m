@@ -1,79 +1,141 @@
-clearvars
-% change file path here
-path='C:\Users\andre\OneDrive\Manuscripts\2021 Alginate\01-05-2022 all data\Alginate(micro)\f=0.158';
-file='tr-4.mat';
+% Parameters
+M      = 20;   % # of tracers
+L      = 2000;    % box size
 
-load(fullfile(path,file)); 
+% given M, L
+rho = M / L^2;             
+E_R = 1/(2*sqrt(rho));     
+xi_min = 0.3*E_R;          
+xi_max = 3*E_R;   
 
-[msd,msd_sp]=calculate_MSD(tr);
+fprintf('Mean NN distance ≃ %.1f px.\n', E_R);
+fprintf('Recommend ξ in [%.1f, %.1f] px for nonzero χ_cross.\n', xi_min, xi_max);
+
+% pick one ξ in that interval
+xi = E_R;    % e.g. set ξ = mean NN ≃ 224 px
+
+xi=xi/10;
+
+% determine Nx for p grid‐points/ξ
+p      = 8;  
+Nx_raw = ceil(p*L/xi);
+Nx     = 2^nextpow2(Nx_raw);
+
+fprintf('Using ξ = %.1f px → Nx = %d (Δx = %.2f px)\n', xi, Nx, L/Nx);
+
+D0     = 10;     % mean diffusivity
+sigmaD = 10;   % std of diffusivity
+dim    = 2;     % 1/2/3
+dt     = 0.01;  % time step
+Nsteps = 5000;  % total number of steps
+nLag   = 100;   % lag in steps for overlap: Delta_t = nLag*dt
 
 
+%--- Build correlated Gaussian field G(r) in arbitrary dim --------------%
+h = L/Nx;
+m = ceil(3*xi/h);
+coords = (-m:m)*h;    % vector of length 2m+1
 
+switch dim
+    case 1
+        % 1D kernel
+        K = exp(-coords.^2/(2*xi^2));
+        K = K / sum(K);
+        W = randn(Nx,1);
+        G = conv(W, K, 'same');
 
+    case 2
+        % 2D kernel
+        [X,Y] = meshgrid(coords, coords);
+        K = exp(-(X.^2 + Y.^2)/(2*xi^2));
+        K = K / sum(K(:));
+        W = randn(Nx,Nx);
+        G = conv2(W, K, 'same');
 
+    case 3
+        % 3D kernel
+        [X,Y,Z] = ndgrid(coords, coords, coords);
+        K = exp(-(X.^2 + Y.^2 + Z.^2)/(2*xi^2));
+        K = K / sum(K(:));
+        W = randn(Nx,Nx,Nx);
+        G = convn(W, K, 'same');
 
-function [msd_results, single_particle_msds] = calculate_MSD(tracks)  
-    % Input: Nx4 matrix [x, y, step_id, track_id]  
-    % Output: MSD matrix [delta_step, mean_sqdisp, count]  
-    % Output: cell array containing MSD for each trajectory  
+    otherwise
+        error('dim must be 1, 2 or 3');
+end
 
-    track_ids = unique(tracks(:, 4));  
-    num_tracks = length(track_ids);  
-    single_particle_msds = cell(num_tracks, 1);  
+% Standardize G to zero mean, unit variance
+G = (G - mean(G(:))) / std(G(:));
+
+%--- Exponentiate to get a strictly positive, log‐normal D_field ------%
+sigma2 = log(1 + (sigmaD/D0)^2);
+sigmaLN = sqrt(sigma2);
+muLN    = log(D0) - 0.5*sigma2;
+Df = exp(muLN + sigmaLN * G);   % Df is now >0 everywhere
+
+%--- Build grid coordinates for interpolation ------------------------%
+switch dim
+    case 1
+        xgrid = (0:Nx-1)*h;
+        Fi=griddedInterpolant({xgrid},Df,'linear','nearest');
+
+    case 2
+        xgrid = (0:Nx-1)*h;
+        ygrid = xgrid;
+        Fi = griddedInterpolant({xgrid,ygrid}, Df, 'linear', 'nearest');
+
+    case 3
+        xgrid = (0:Nx-1)*h;
+        ygrid = xgrid;
+        zgrid = xgrid;
+        Fi=griddedInterpolant({xgrid,ygrid,zgrid},Df,'linear','nearest');
+
+end
+% Fi(xi, yi) now returns Df at all (xi,yi), defaulting to 'nearest' if out‐of‐bounds.
+
+%--- Simulate M tracers ------------------------------------------------
+% initialize
+Xraw = zeros(M,dim,Nsteps+1);
+X    = zeros(M,dim,Nsteps+1);
+Xraw(:,:,1) = L*rand(M,dim);
+X(:,:,1)    = Xraw(:,:,1);
+
+for t=1:Nsteps
+    % 1) gather positions
+    Xi_wrapped = X(:,:,t);          % M×dim
+    % 2) interpolate vectorized
+    switch dim
+        case 1
+            Di=Fi(Xi_wrapped(:,1));
+        case 2
+            Di = Fi(Xi_wrapped(:,1), Xi_wrapped(:,2));
+        case 3
+            Di=Fi(Xi_wrapped(:,1),Xi_wrapped(:,2),Xi_wrapped(:,3));
+    end
+    % 3) random step for all
+    dW = randn(M,dim)*sqrt(dt);
+    dXraw      = sqrt(2*Di).*dW;          % true small step
+    Xraw(:,:,t+1) = Xraw(:,:,t) + dXraw;   % unwrapped pos
+    X(:,:,t+1)    = mod(Xraw(:,:,t+1), L); % for interpolation next stepend
+end
+
+close all
+
+tr=[];
+for i=1:M
     
-    % Preallocate arrays for results  
-    all_delta_steps_cell = cell(num_tracks, 1);  
-    all_sq_disps_cell = cell(num_tracks, 1);  
+    Xpos=squeeze(Xraw(i,1,:));
+    Ypos=squeeze(Xraw(i,2,:));
+    step_id=1:length(Xpos);
+    tr=[tr;[Xpos(:),Ypos(:),step_id(:),ones(length(step_id),1).*i]];
 
-    parfor k = 1:num_tracks  
-        track_id = track_ids(k);  
-        track_data = tracks(tracks(:, 4) == track_id, :);  
-        
-        % Sort by step_id and extract coordinates  
-        [~, idx] = sort(track_data(:, 3));  
-        x = track_data(idx, 1);  
-        y = track_data(idx, 2);  
-        steps = track_data(idx, 3);  
-        n = length(steps);  
-        
-        if n < 2  
-            continue; % Skip if there's not enough data  
-        end  
-        
-        % Generate all valid step pairs  
-        [i, j] = find(triu(true(n), 1)); % Indices for upper triangle  
-        dx = x(j) - x(i);  
-        dy = y(j) - y(i);  
-        delta_steps = steps(j) - steps(i);  
-        sq_disps = dx.^2 + dy.^2;  
+    
+    plot(Xpos,Ypos,'.-')
 
-        % Store calculated results  
-        all_delta_steps_cell{k} = delta_steps;  
-        all_sq_disps_cell{k} = sq_disps;  
+    
 
-        % Calculate single particle MSD  
-        single_particle_msd = zeros(max(steps), 3);  
-        for step = 1:max(steps)  
-            ind = (delta_steps == step);  
-            if any(ind)  
-                single_particle_msd(step, 1) = step; % lag time  
-                single_particle_msd(step, 2) = mean(sq_disps(ind)); % MSD  
-                single_particle_msd(step, 3) = sum(ind); % Number of observations  
-            end  
-        end  
-        single_particle_msds{k} = single_particle_msd;  
-    end  
-    
-    % Concatenate results after parfor loop  
-    all_delta_steps = vertcat(all_delta_steps_cell{:});  
-    all_sq_disps = vertcat(all_sq_disps_cell{:});  
-    
-    % Calculate overall statistics  
-    [unique_deltas, ~, idx] = unique(all_delta_steps);  
-    sum_sqdisp = accumarray(idx, all_sq_disps, [], @sum);  
-    counts = accumarray(idx, all_sq_disps, [], @numel);  
-    
-    % Create output matrix for overall MSD  
-    msd_results = [unique_deltas, sum_sqdisp ./ counts, counts];  
-    msd_results = sortrows(msd_results, 1);  
-end    
+
+    hold on;
+end
+hold off
+
