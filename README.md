@@ -95,18 +95,18 @@ The calculated restults will be remembered once you close the pop-up windows. An
 
 There can be a set of *P*(*D*) data for only one lag time. Everytime you click `Lucy` button, the old results of *P*(*D*) is replaced by new ones.
 
-### The $\chi_4$ calculation
-The 4-point susceptibilities $\chi_4$ are calculated from the trajectories. The calculation requires Parallel Computing Toolbox. And you should have at least one profile for parallel computing. Please refer to official help of this toolbox. The app check if your environment support parallel computing before started. If so, the option of $\chi_4$ will be enabled.
+### The $\chi$ calculation
+The dynamic susceptibilities $\chi=\chi_\text{single}+\chi_\text{cross}$ are calculated from the trajectories. The calculation requires Parallel Computing Toolbox. And you should have at least one profile for parallel computing. Please refer to official help of this toolbox. The app check if your environment support parallel computing before started. If so, the option of $\chi_\text{cross}$ will be enabled.
 
-The theory behind 4-point susceptibility is not discussed here. Please refer to other papers, such as: Karmaker, Dasgupta & Sastry (2016), Rep. Prog. Phys. 79:016601.
+The theory behind this susceptibility is not discussed here. Please refer to our papers in the future.
 
-Click the button $\chi_4$ to start calculation. If the calculation is successful, the status message is "Done!". Select $\chi_4$ option button and the result will be plotted. The result plotted is the self-part of the 4-point susceptibility, since for multiparticle tracking it is usually the only meaninful result. But by clicking `Save ...` button a number of results is saved.
+Click the button `χ_cross` to start calculation. If the calculation is successful, the status message is "Done!". Select the option button beside the `χ_cross` button and the result will be plotted. The result plotted is the $\chi_\text{cross}$, since for multiparticle tracking it is usually the only meaninful result. But by clicking `Save ...` button a number of other variables are also saved.
 
 ### The `Trajectories` popup window
 
 Click the `traj. excl.` button to open the `Trajectories` popup window.
 
-In the popup window, single-particle MSD <&Delta;*x*<sup>2</sup>><sub>single</sub> (solid) and the corresponding multi-particle counterpart (dash) is plotted in the left axes, with the selected one highlighted. The corresponding trajectory of the selected particle is plotted in the right, bigger axes, with its track id also displayed. You can select a track by clicking on the SP-MSD plot, or from the `Track#` list box. Double clicking one item in the `Track#` list box adds the corresponding item to the `Exclude:` list box, which is the track id's to be excluded. Double clicking one item in the `Exclude:` list box removes it. Click save or just directly close the popup window to save the excluded tracks information. After that, click the `Calculate` button immediately to re-calculate the variables based from the excluded tracks. After this calculation, the excluded tracks information is cleared. Clicking the `Calculate` button again calculates the variable based on the original tracks in the table. Changing the track list in the table also clears the excluded tracks information. You must re-select the excluded tracks if you just change the track list.
+In the popup window, single-particle MSD <&Delta;*x*<sup>2</sup>><sub>single</sub> (solid) and the corresponding multi-particle counterpart (dash) is plotted in the left axes, with the selected one highlighted. The corresponding trajectory of the selected particle is plotted in the right, bigger axes, with its track id also displayed. You can select a track by clicking on the SP-MSD plot, or from the `Track#` list box. Double clicking one item in the `Track#` list box adds the corresponding item to the `Exclude:` list box, which is the track id's to be excluded. Double clicking one item in the `Exclude:` list box removes it. Click save or just directly close the popup window to save the excluded   tracks information. Then the `Calculation` or `χ_cross` function will work based on the excluded set of trajectories. Everytime the `traj. excl.` button is clicked, the trajectories library returns to the initial/complete set again.
 
 ## Saving data
 
