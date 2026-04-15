@@ -146,7 +146,7 @@ The distribution density and distribution function of diffusivity, respectively.
 A reconstructed van_Hove function from the calculated *P*(*D*) data. It is a 2-column matrix: &Delta;*x* (micro;m), distribution density *p*(&Delta;*x*) (You may check the validity of the latter by comparing `van_Hove_rec` with the van_Hove data of the same lag time in the `msd_data.mat` file.
 
 #### 4-point susceptibilities
-A separated file named `chi4.mat` will be saved to the selected path. This file includes the self-, distinct-part and total result of $\chi_4$, as the variables, `chi4_s`, `chi4_d`,`_chi4_t`, as well as those of the overlap functions $Q\left(\Delta t\right)$, as the variables, `Q_s`, `Q_d`, `Q_t`. The first column of these variables are the lag time in second. The values of the $\chi_4$ is by unit m<sup>3</sup>.
+A separated file named `chi4.mat` will be saved to the selected path. This file includes the values $\chi_\text{cross}$ `chi_Cross_save`, its small-sample variance `chi_cross_var_save`, as functions of the lag time and tolerance. Also included is the value $\chi_\text{cross}^*$ at the characteristic tolarance $\delta^*$, `chi_cross_ast`.
 
 [![View track_analysis on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://ww2.mathworks.cn/matlabcentral/fileexchange/118310-track_analysis)
 
