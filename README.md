@@ -11,7 +11,7 @@ Features:
 
 ### Installation
 
-Unzip and drag the `.mlappinstall` file to the command window of MATLAB. After the installation it will appear in the app list. 
+Uninstall old version first in the add-ons manager in MATLAB. Search for `track_analysis` (author Weixiang Sun) and install.
 
 ### Data preparation
 
